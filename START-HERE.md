@@ -6,20 +6,21 @@
 
 ## 📖 Which Guide Should I Follow?
 
-### **👉 For 2026: [SETUP-STEPS-SIMPLIFIED.md](SETUP-STEPS-SIMPLIFIED.md)** ⭐ RECOMMENDED
+### **👉 Ready to Deploy? [DEPLOYMENT.md](DEPLOYMENT.md)** 🚀 QUICKEST PATH
 
-**This is the fastest, most up-to-date guide:**
-- ✅ Reflects new Bedrock auto-access (no manual approval needed)
-- ✅ Step-by-step with exact console instructions
-- ✅ 9 clear steps, ~25 minutes total
-- ✅ Copy-paste ready code blocks
-- ✅ Written for absolute beginners
+**Complete deployment in 40 minutes:**
+- ✅ Step-by-step AWS Console instructions
+- ✅ Frontend setup included
+- ✅ Verification checklist
+- ✅ Production-ready configuration
+- ✅ Tested March 2026
 
 ---
 
 ### Alternative Guides
 
-- **[TESTED-CONFIG.md](TESTED-CONFIG.md)** ⚡ **NEW!** - Exact working configuration (verified March 2026)
+- **[TESTED-CONFIG.md](TESTED-CONFIG.md)** ⚡ - Exact working configuration (verified March 2026)
+- **[SETUP-STEPS-SIMPLIFIED.md](SETUP-STEPS-SIMPLIFIED.md)** - 2026 simplified guide (25 min)
 - **[AWS-SETUP-GUIDE.md](AWS-SETUP-GUIDE.md)** - Comprehensive guide with troubleshooting
 - **[QUICK-START-CHECKLIST.md](QUICK-START-CHECKLIST.md)** - Checkbox format for tracking progress
 - **[PROJECT-STRUCTURE.md](PROJECT-STRUCTURE.md)** - Understand the architecture
@@ -46,9 +47,13 @@
 
 ## 🚀 Start Now
 
-Open this file and follow step-by-step:
+**Want to deploy immediately?**
 
-**[SETUP-STEPS-SIMPLIFIED.md](SETUP-STEPS-SIMPLIFIED.md)**
+**[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete AWS + Frontend deployment (40 min)
+
+**Want to understand first?**
+
+**[SETUP-STEPS-SIMPLIFIED.md](SETUP-STEPS-SIMPLIFIED.md)** - Detailed explanations (25 min)
 
 ---
 

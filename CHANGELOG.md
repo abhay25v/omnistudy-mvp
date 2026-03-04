@@ -54,7 +54,8 @@
 1. **TESTED-CONFIG.md** - Complete verified working configuration
 2. **START-HERE.md** - Quick guide navigation
 3. **SETUP-STEPS-SIMPLIFIED.md** - 2026-optimized setup (9 steps, ~25 min)
-4. **CHANGELOG.md** - This file
+4. **DEPLOYMENT.md** - Complete deployment walkthrough (40 min)
+5. **CHANGELOG.md** - This file
 
 #### ✅ Updated Guides
 1. **README.md**

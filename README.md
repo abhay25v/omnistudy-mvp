@@ -92,6 +92,12 @@ omnistudy-mvp/
 4. **AWS CLI** configured with credentials (optional - can use Console)
 5. **Git** (optional)
 
+### 🎯 Ready to Deploy?
+
+**👉 Follow: [DEPLOYMENT.md](DEPLOYMENT.md)** - Complete step-by-step deployment (40 min)
+
+Or choose a guide below:
+
 ### Step 1: AWS Setup (15-20 minutes)
 
 **📘 NEW: Use the simplified 2026 guide:** [SETUP-STEPS-SIMPLIFIED.md](SETUP-STEPS-SIMPLIFIED.md)
