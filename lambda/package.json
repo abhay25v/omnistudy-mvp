@@ -1,0 +1,20 @@
+{
+  "name": "omnistudy-lambda",
+  "version": "1.0.0",
+  "description": "OmniStudy AWS Lambda backend for AI-powered learning",
+  "main": "handler.js",
+  "scripts": {
+    "test": "node test-local.js",
+    "package": "npm install --production && zip -r function.zip . -x '*.git*' 'test-local.js'"
+  },
+  "keywords": ["aws", "lambda", "bedrock", "polly", "transcribe", "textract"],
+  "author": "OmniStudy Team",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.525.0",
+    "@aws-sdk/client-textract": "^3.525.0",
+    "@aws-sdk/client-transcribe": "^3.525.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.525.0",
+    "@aws-sdk/client-polly": "^3.525.0"
+  }
+}
