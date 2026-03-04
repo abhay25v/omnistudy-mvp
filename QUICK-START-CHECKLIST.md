@@ -7,9 +7,10 @@
 ## ✅ Prerequisites (5 minutes)
 
 - [ ] AWS Account created (free tier eligible)
+- [ ] **Valid payment method added** to AWS account (required for some Bedrock models)
 - [ ] Node.js 18+ installed (`node --version`)
-- [ ] AWS CLI installed (`aws --version`)
-- [ ] AWS credentials configured (`aws configure`)
+- [ ] AWS CLI installed (`aws --version`) - **Optional** (can use Console)
+- [ ] AWS credentials configured (`aws configure`) - **Optional**
 
 ---
 
@@ -23,11 +24,13 @@
 - [ ] Add bucket policy for public read access
 - [ ] ✍️ Write down bucket name: `_________________________`
 
-### Bedrock (Auto-Enabled - No Action Required!)
-- [ ] ✅ **Bedrock models auto-enable on first use** (2026 update)
-- [ ] Note: First-time Anthropic users may need to provide use case details
-- [ ] If you get access error, go to Bedrock playground and invoke Claude once
-- [ ] ✍️ Model ID to use: `anthropic.claude-3-haiku-20240307-v1:0`
+### Bedrock (Auto-Enabled - 2026 Update)
+- [ ] ✅ **Bedrock models auto-enable on first use** (no manual approval needed!)
+- [ ] First-time users: Test model in Bedrock Playground once to activate
+- [ ] ✅ **Recommended for free tier:** `amazon.titan-text-express-v1`
+- [ ] Alternative (requires payment method): `anthropic.claude-haiku-4-5-20251001-v1:0`
+- [ ] ❌ **Don't use:** Claude 3.5 models (deprecated as "Legacy" in 2026)
+- [ ] ✍️ Model ID to use: `amazon.titan-text-express-v1`
 
 ### IAM Role
 - [ ] Go to IAM → Roles → Create role
@@ -45,32 +48,39 @@
 ### Lambda Function
 - [ ] Go to Lambda → Create function
 - [ ] Function name: `OmniStudy-ProcessRequest`
-- [ ] Runtime: Node.js 18.x
+- [ ] Runtime: **Node.js 20.x** (recommended for 2026)
 - [ ] Execution role: Use existing → `OmniStudy-Lambda-ExecutionRole`
 - [ ] Create function
+- [ ] **CRITICAL:** Code → Runtime settings → Edit:
+  - [ ] Handler: Change from `index.handler` to **`handler.handler`**
+  - [ ] Save (this prevents "Cannot find module 'index'" error)
 - [ ] Configuration → General → Edit:
-  - [ ] Memory: 512 MB
-  - [ ] Timeout: 300 seconds (5 minutes)
+  - [ ] Memory: **512 MB**
+  - [ ] Timeout: **300 seconds** (5 minutes)
+  - [ ] Save
 - [ ] Configuration → Environment variables → Add:
   - [ ] `S3_BUCKET` = your bucket name
-  - [ ] `BEDROCK_MODEL_ID` = `anthropic.claude-3-haiku-20240307-v1:0`
+  - [ ] `BEDROCK_MODEL_ID` = `amazon.titan-text-express-v1`
   - [ ] `POLLY_VOICE_ID` = `Aditi`
   - [ ] `TRANSCRIBE_LANGUAGE` = `hi-IN`
+  - [ ] Save
 
 ### API Gateway
 - [ ] Go to API Gateway → Create API
-- [ ] Choose: HTTP API → Build
+- [ ] Choose: **HTTP API** → Build
 - [ ] Add integration: Lambda → Select `OmniStudy-ProcessRequest`
 - [ ] API name: `OmniStudy-API`
 - [ ] Configure routes:
-  - [ ] Method: POST
+  - [ ] Method: **POST**
   - [ ] Path: `/process`
 - [ ] Create
-- [ ] CORS → Configure:
-  - [ ] Access-Control-Allow-Origin: `*`
-  - [ ] Access-Control-Allow-Methods: `POST,OPTIONS`
+- [ ] **IMPORTANT:** CORS → Configure:
+  - [ ] **Access-Control-Allow-Origin:** `*`
+  - [ ] **Access-Control-Allow-Headers:** Type exactly: `content-type`
+  - [ ] **Access-Control-Allow-Methods:** `POST,OPTIONS`
+  - [ ] Save
 - [ ] Deploy
-- [ ] ✍️ Copy Invoke URL: `_________________________`
+- [ ] ✍️ Copy Invoke URL (should end with .amazonaws.com): `_________________________`
 
 ---
 

@@ -135,27 +135,59 @@ Test with browser DevTools responsive mode.
 - ARIA labels (to be added)
 - Audio controls for screen readers
 
-## 🐛 Common Issues
+## 🐛 Common Issues (Real-World Tested)
 
-### CORS Error
+### "Failed to fetch" / CORS Error
 
+**Error in Browser Console:**
 ```
 Access to fetch at '...' from origin 'http://localhost:3000' has been blocked by CORS
 ```
 
-**Solution:** Enable CORS in API Gateway (see AWS-SETUP-GUIDE.md Step 5.5)
+**Solution:**
+1. Go to **API Gateway** → Your API → **CORS**
+2. Click **Configure** and set:
+   - **Access-Control-Allow-Origin:** `*`
+   - **Access-Control-Allow-Headers:** `content-type` (type exactly as shown)
+   - **Access-Control-Allow-Methods:** `POST,OPTIONS`
+3. Click **Save**
+4. **IMPORTANT:** Restart dev server: Stop (Ctrl+C) and run `npm run dev` again
+
+⚠️ **Changes to `.env.local` require dev server restart!**
+
+---
 
 ### API URL Not Found
 
 ```
-API URL not configured
+API URL not configured. Please set NEXT_PUBLIC_API_URL in .env.local
 ```
 
-**Solution:** Create `.env.local` and add `NEXT_PUBLIC_API_URL`
+**Solution:**
+1. Create `.env.local` file in frontend folder
+2. Add your API Gateway URL with `/process` path:
+   ```
+   NEXT_PUBLIC_API_URL=https://abc123xyz.execute-api.us-east-1.amazonaws.com/process
+   ```
+3. **Restart dev server** (important!)
+
+**✅ Correct URL format:**
+```
+https://[api-id].execute-api.us-east-1.amazonaws.com/process
+```
+
+**❌ Wrong (missing /process):**
+```
+https://[api-id].execute-api.us-east-1.amazonaws.com
+```
+
+---
 
 ### File Upload Fails
 
-**Solution:** Update Cloudinary credentials or implement S3 presigned URLs
+**Solution:** Update Cloudinary credentials or implement S3 presigned URLs.
+
+For testing, use **Text Input** which doesn't require file upload configuration.
 
 ---
 

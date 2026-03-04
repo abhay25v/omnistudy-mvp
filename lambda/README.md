@@ -1,6 +1,8 @@
 # OmniStudy Lambda Backend
 
-Production-ready AWS Lambda function using Node.js 18 and AWS SDK v3.
+Production-ready AWS Lambda function using Node.js 20 and AWS SDK v3.
+
+**✅ Tested and verified working on AWS Free Tier (March 2026)**
 
 ## 🏗️ Architecture
 
@@ -104,9 +106,32 @@ Set these in Lambda Console → Configuration → Environment variables:
 |----------|---------|----------|
 | `AWS_REGION` | `us-east-1` | Auto-set by Lambda |
 | `S3_BUCKET` | `omnistudy-audio-prod-2026` | ✅ Yes |
-| `BEDROCK_MODEL_ID` | `anthropic.claude-3-haiku-20240307-v1:0` | ✅ Yes |
+| `BEDROCK_MODEL_ID` | See tested models below | ✅ Yes |
 | `POLLY_VOICE_ID` | `Aditi` (Hindi) or `Joanna` (English) | No (default: Aditi) |
 | `TRANSCRIBE_LANGUAGE` | `hi-IN` or `en-US` | No (default: hi-IN) |
+
+### ✅ Tested Working Models (March 2026)
+
+**Recommended for Free Tier:**
+```
+BEDROCK_MODEL_ID=amazon.titan-text-express-v1
+```
+✅ Works without payment method  
+✅ No payment validation required  
+✅ Good quality for educational content
+
+**For Paid Accounts:**
+```
+BEDROCK_MODEL_ID=anthropic.claude-haiku-4-5-20251001-v1:0
+```
+⚠️ Requires valid credit card on AWS account  
+⚡ Higher quality responses
+
+**⚠️ Deprecated (Don't Use):**
+- ❌ `anthropic.claude-3-5-sonnet-*` (marked as Legacy in 2026)
+- ❌ `us.anthropic.claude-3-5-sonnet-*` (marked as Legacy in 2026)
+
+The Lambda handler automatically detects and uses the correct API format for each model.
 
 ## 🧪 Testing
 
@@ -203,23 +228,116 @@ Response: Return new URL
 
 **With 50% cache hit rate: ~$0.015 per request**
 
-## 🐛 Common Errors
+## 🐛 Common Errors (Real-World Tested)
 
-### Error: `AccessDeniedException: User is not authorized to perform: bedrock:InvokeModel`
+### Error: `INVALID_PAYMENT_INSTRUMENT`
 
-**Solution:** Check IAM role has `AmazonBedrockFullAccess` and model access is granted in Bedrock console.
+```
+AccessDeniedException: Model access is denied due to INVALID_PAYMENT_INSTRUMENT
+```
+
+**Root Cause:** AWS requires valid payment method for certain Bedrock models (even with free tier credits)
+
+**Solutions:**
+1. **Option A:** Add credit card to AWS account (Billing → Payment methods)
+2. **Option B:** Use `amazon.titan-text-express-v1` (no payment validation needed) ✅ Recommended
+
+---
+
+### Error: "Model is marked as Legacy"
+
+```
+Access denied. This Model is marked by provider as Legacy
+```
+
+**Root Cause:** Claude 3.5 models deprecated in March 2026
+
+**Solution:** Update `BEDROCK_MODEL_ID` to:
+- `amazon.titan-text-express-v1` (free tier friendly) ✅
+- `anthropic.claude-haiku-4-5-20251001-v1:0` (higher quality)
+
+---
+
+### Error: "Model identifier is invalid"
+
+```
+ValidationException: The provided model identifier is invalid
+```
+
+**Solution:**
+1. Go to Bedrock Console → Foundation models
+2. Find your model and copy the **exact Model ID**
+3. Ensure you're in **us-east-1** region
+4. Paste exact ID into Lambda environment variable
+
+---
+
+### Error: "Voice does not support neural engine"
+
+```
+This voice does not support the selected engine: neural
+```
+
+**Status:** ✅ Already fixed in code! Uses `Engine: "standard"` for compatibility.
+
+If you modified the code, change:
+```javascript
+Engine: "neural"  // ❌ Doesn't work with all voices
+```
+To:
+```javascript
+Engine: "standard"  // ✅ Works with all voices
+```
+
+---
+
+### Error: `Runtime.ImportModuleError: Cannot find module 'index'`
+
+```
+Runtime.ImportModuleError: Error: Cannot find module 'index'
+```
+
+**Root Cause:** Lambda handler configured incorrectly
+
+**Solution:**
+1. Lambda → Code → Runtime settings → Edit
+2. Change Handler from `index.handler` to: **`handler.handler`**
+3. Save
+
+---
 
 ### Error: `NoSuchBucket: The specified bucket does not exist`
 
 **Solution:** Create S3 bucket and update `S3_BUCKET` environment variable.
 
+---
+
 ### Error: `Task timed out after 3.00 seconds`
 
-**Solution:** Increase Lambda timeout to 300 seconds (Transcribe takes time).
+**Solution:**
+1. Lambda → Configuration → General configuration → Edit
+2. Timeout: **300 seconds** (5 minutes)
+3. Memory: **512 MB** minimum
+4. Save
+
+---
 
 ### Error: `Cannot read property 'text' of undefined`
 
 **Solution:** No text extracted. Check input image quality or audio clarity.
+
+---
+
+### First Bedrock Call Fails
+
+**Issue:** 2026 Bedrock models "auto-enable on first use"
+
+**Solution:**
+1. Bedrock → Playgrounds → Chat
+2. Select your model
+3. Type "Hello" and click Run
+4. Once you get response, model is activated
+5. Try Lambda again
 
 ## 📝 CloudWatch Logs
 

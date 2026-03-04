@@ -19,6 +19,7 @@
 
 ### Alternative Guides
 
+- **[TESTED-CONFIG.md](TESTED-CONFIG.md)** ⚡ **NEW!** - Exact working configuration (verified March 2026)
 - **[AWS-SETUP-GUIDE.md](AWS-SETUP-GUIDE.md)** - Comprehensive guide with troubleshooting
 - **[QUICK-START-CHECKLIST.md](QUICK-START-CHECKLIST.md)** - Checkbox format for tracking progress
 - **[PROJECT-STRUCTURE.md](PROJECT-STRUCTURE.md)** - Understand the architecture

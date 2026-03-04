@@ -4,19 +4,23 @@
 omnistudy-mvp/
 │
 ├── 📘 README.md                          # Main project documentation
-├── 📘 AWS-SETUP-GUIDE.md                 # Complete AWS setup tutorial (START HERE!)
+├── 📘 START-HERE.md                       # ⭐ Begin here! Which guide to follow
+├── 📘 TESTED-CONFIG.md                    # ⚡ NEW! Verified working setup (March 2026)
+├── 📘 AWS-SETUP-GUIDE.md                 # Complete AWS setup tutorial
 ├── 📘 QUICK-START-CHECKLIST.md           # Step-by-step checklist
+├── 📘 SETUP-STEPS-SIMPLIFIED.md          # 2026 simplified guide
+├── 📘 PROJECT-STRUCTURE.md               # This file - architecture overview
 │
 ├── 🔧 .gitignore                         # Git ignore rules
 ├── 🚀 deploy-lambda.sh                   # Lambda deployment (Mac/Linux)
 ├── 🚀 deploy-lambda.ps1                  # Lambda deployment (Windows)
 │
-├── 📂 lambda/                            # ⚡ AWS Lambda Backend (Node.js 18)
+├── 📂 lambda/                            # ⚡ AWS Lambda Backend (Node.js 20)
 │   ├── handler.js                        # Main Lambda function (PRODUCTION-READY)
+│   │                                     # - Multi-model Bedrock support (Titan/Claude/DeepSeek)
 │   │                                     # - Textract for image text extraction
 │   │                                     # - Transcribe for audio transcription
-│   │                                     # - Bedrock for AI simplification
-│   │                                     # - Polly for text-to-speech
+│   │                                     # - Polly for text-to-speech (standard engine)
 │   │                                     # - S3 for caching & storage
 │   ├── package.json                      # AWS SDK v3 dependencies
 │   ├── test-local.js                     # Local testing script
@@ -75,11 +79,14 @@ omnistudy-mvp/
 
 ## 🚀 Quick Start Path
 
-1. **Read**: `AWS-SETUP-GUIDE.md` (20-30 min)
-2. **Follow**: `QUICK-START-CHECKLIST.md` (check each box)
-3. **Deploy**: Run `deploy-lambda.ps1` or `deploy-lambda.sh`
-4. **Test**: Open frontend at http://localhost:3000
-5. **Learn**: Explore `lambda/handler.js` to understand AWS integration
+1. **Read**: `START-HERE.md` (2 min) - Understand which guide to follow
+2. **For 2026**: `SETUP-STEPS-SIMPLIFIED.md` (25 min) - Fastest path
+3. **Having issues?** `TESTED-CONFIG.md` - Exact working configuration
+4. **Alternative**: `AWS-SETUP-GUIDE.md` (30 min) - Comprehensive with explanations
+5. **Track Progress**: `QUICK-START-CHECKLIST.md` (check each box)
+6. **Deploy**: Run `deploy-lambda.ps1` or `deploy-lambda.sh`
+7. **Test**: Open frontend at http://localhost:3000
+8. **Learn**: Explore `lambda/handler.js` to understand AWS integration
 
 ---
 
@@ -87,10 +94,10 @@ omnistudy-mvp/
 
 | Component | Files | Lines of Code | Technologies |
 |-----------|-------|---------------|--------------|
-| Lambda Backend | 3 | ~600 | Node.js 18, AWS SDK v3 |
+| Lambda Backend | 3 | ~600 | Node.js 20, AWS SDK v3 |
 | Next.js Frontend | 8 | ~400 | React 18, TypeScript, Tailwind |
-| Documentation | 5 | ~1200 | Markdown |
-| **Total** | **16** | **~2200** | **Production-ready** |
+| Documentation | 8 | ~2500 | Markdown |
+| **Total** | **19** | **~3500** | **Production-ready** |
 
 ---
 
@@ -155,8 +162,10 @@ omnistudy-mvp/
 │  └─────────────────────┬───────────────────────────────┘   │
 │                        ▼                                    │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │ Step 2: Simplify with AI                            │   │
-│  │  - Send to Bedrock (Claude 3)                       │   │
+│  │ Step 2: Simplify with AI (Multi-Model Support)      │   │
+│  │  - Amazon Titan (Free tier friendly)                │   │
+│  │  - Claude 4.x Haiku (High quality)                  │   │
+│  │  - DeepSeek V3 (Cost effective)                     │   │
 │  │  - Use class-level prompt template                  │   │
 │  │  - Get simplified explanation                       │   │
 │  └─────────────────────┬───────────────────────────────┘   │
